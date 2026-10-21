@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
@@ -148,6 +149,9 @@ export default function App() {
           <MessageSquare className="w-6 h-6 fill-black" />
         </a>
       </div>
+
+      {/* Vercel Web Analytics */}
+      <Analytics />
     </div>
   );
 }
