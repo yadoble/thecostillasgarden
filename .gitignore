@@ -1,5 +1,40 @@
-# Logs
-logs
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+.npm/
+
+# Production Build Artifacts
+dist/
+dist-ssr/
+build/
+out/
+
+# Environment & Local Configuration
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+*.env.*
+!*.env.example
+
+# Vite & Bundler Caches
+.vite/
+.turbo/
+.cache/
+.parcel-cache/
+
+# Linter & Testing Artifacts
+coverage/
+*.lcov
+.nyc_output/
+.eslintcache
+.stylelintcache
+
+# Logs & Diagnostics
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -7,18 +42,46 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
+# Editor & IDE Directories
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
+!.vscode/settings.json
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*.swo
+*.swn
+*.swp
+*.sublime-project
+*.sublime-workspace
+
+# Operating System Files
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+
+# Temporary / Scratch Files
+tmp/
+temp/
+*.tmp
+*.temp
