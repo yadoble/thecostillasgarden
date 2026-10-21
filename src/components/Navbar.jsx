@@ -41,26 +41,26 @@ export default function Navbar({ onOpenReservation, onOpenCart, cartItemCount = 
             : 'bg-gradient-to-b from-black/80 via-black/40 to-transparent py-5'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between w-full">
             {/* Brand Logo & Name */}
             <a
               href="#inicio"
               onClick={(e) => handleLinkClick(e, '#inicio')}
-              className="flex items-center gap-3 group"
+              className="flex items-center gap-2.5 sm:gap-3 group shrink min-w-0"
             >
-              <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden border border-white/20 p-0.5 bg-black/60 shadow-lg shadow-black group-hover:border-amber-500/60 transition-colors">
+              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border border-white/20 p-0.5 bg-black/60 shadow-lg shadow-black group-hover:border-amber-500/60 transition-colors shrink-0">
                 <img
                   src="/logo.png"
                   alt="The Costillas Garden"
                   className="w-full h-full object-cover rounded-full"
                 />
               </div>
-              <div className="flex flex-col text-left">
-                <span className="font-heading font-black text-sm sm:text-base tracking-[0.2em] uppercase text-white group-hover:text-amber-400 transition-colors">
+              <div className="flex flex-col text-left min-w-0">
+                <span className="font-heading font-black text-xs sm:text-base tracking-[0.15em] sm:tracking-[0.2em] uppercase text-white group-hover:text-amber-400 transition-colors truncate">
                   The Costillas
                 </span>
-                <span className="font-serif-display text-[10px] sm:text-xs tracking-[0.3em] uppercase text-zinc-400 -mt-1 font-semibold">
+                <span className="font-serif-display text-[9px] sm:text-xs tracking-[0.25em] sm:tracking-[0.3em] uppercase text-zinc-400 -mt-0.5 sm:-mt-1 font-semibold truncate">
                   Garden BBQ
                 </span>
               </div>
@@ -80,8 +80,8 @@ export default function Navbar({ onOpenReservation, onOpenCart, cartItemCount = 
               ))}
             </nav>
 
-            {/* Right Action Buttons */}
-            <div className="hidden sm:flex items-center gap-3">
+            {/* Desktop Right Action Buttons (visible only on lg screens >= 1024px) */}
+            <div className="hidden lg:flex items-center gap-3 shrink-0">
               {/* Cart / Selection Button */}
               <button
                 onClick={onOpenCart}
@@ -89,7 +89,7 @@ export default function Navbar({ onOpenReservation, onOpenCart, cartItemCount = 
                 title="Ver selección de platillos"
               >
                 <ShoppingBag className="w-4 h-4 text-amber-400" />
-                <span className="hidden md:inline">Mi Selección</span>
+                <span>Mi Selección</span>
                 {cartItemCount > 0 && (
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-amber-500 text-black font-bold text-[11px] animate-pulse">
                     {cartItemCount}
@@ -107,11 +107,12 @@ export default function Navbar({ onOpenReservation, onOpenCart, cartItemCount = 
               </button>
             </div>
 
-            {/* Mobile Menu & Cart Trigger */}
-            <div className="flex items-center gap-2 lg:hidden">
+            {/* Mobile / Tablet Menu & Cart Trigger (visible on all screens < 1024px) */}
+            <div className="flex items-center gap-2 lg:hidden shrink-0">
+              {/* Mobile Cart Button */}
               <button
                 onClick={onOpenCart}
-                className="relative p-2.5 rounded-lg bg-white/5 border border-white/10 text-zinc-200"
+                className="relative p-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-zinc-200 active:scale-95 transition-all shadow-sm"
                 aria-label="Ver selección"
               >
                 <ShoppingBag className="w-5 h-5 text-amber-400" />
@@ -122,12 +123,30 @@ export default function Navbar({ onOpenReservation, onOpenCart, cartItemCount = 
                 )}
               </button>
 
+              {/* Mobile Three-Line Hamburger Button */}
               <button
+                type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2.5 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors"
-                aria-label="Abrir menú"
+                className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-b from-white/15 to-white/5 hover:from-white/25 hover:to-white/10 border border-white/25 text-white active:scale-95 transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                aria-label={mobileMenuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
               >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {mobileMenuOpen ? (
+                  <X className="w-6 h-6 text-white stroke-[2.5]" />
+                ) : (
+                  <svg
+                    className="w-6 h-6 text-white"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="3" x2="21" y1="6" y2="6" />
+                    <line x1="3" x2="21" y1="12" y2="12" />
+                    <line x1="3" x2="21" y1="18" y2="18" />
+                  </svg>
+                )}
               </button>
             </div>
           </div>
@@ -136,15 +155,15 @@ export default function Navbar({ onOpenReservation, onOpenCart, cartItemCount = 
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 lg:hidden">
+        <div className="fixed inset-0 z-[60] lg:hidden">
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm"
+            className="fixed inset-0 bg-black/85 backdrop-blur-md"
             onClick={() => setMobileMenuOpen(false)}
           />
 
           {/* Drawer Content */}
-          <div className="fixed top-0 right-0 bottom-0 w-5/6 max-w-sm bg-[#0e1014] border-l border-white/10 p-6 flex flex-col justify-between z-50 overflow-y-auto">
+          <div className="fixed top-0 right-0 bottom-0 w-5/6 max-w-sm bg-[#0c0e12] border-l border-white/15 p-6 flex flex-col justify-between z-[70] shadow-2xl overflow-y-auto">
             <div>
               {/* Header */}
               <div className="flex items-center justify-between pb-6 border-b border-white/10">
@@ -161,7 +180,7 @@ export default function Navbar({ onOpenReservation, onOpenCart, cartItemCount = 
                 </div>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 text-zinc-400 hover:text-white"
+                  className="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-white/10"
                 >
                   <X className="w-5 h-5" />
                 </button>
